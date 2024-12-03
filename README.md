@@ -74,4 +74,3 @@ If you find any bugs or have problems when you are using ACSCeND, feel free to r
 	eprint = {https://www.biorxiv.org/content/early/2024/12/01/2024.11.26.625418.full.pdf},
 	journal = {bioRxiv}
 }
----
