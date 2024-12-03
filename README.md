@@ -54,8 +54,24 @@ For detailed examples and API reference, visit the [documentation](https://acsce
 
 ---
 
-## Suggestions
+## Suggestions and Issues
 
-We welcome suggestions! If you have any ideas or feedback to improve ACSCeND, please reach out to [Shreyansh Priyadarshi](mailto:shreyansh.priyadarshi02@gmail.com).
+We welcome suggestions and issues! If you have any ideas or feedback to improve ACSCeND, please reach out to [Shreyansh Priyadarshi](mailto:shreyansh.priyadarshi02@gmail.com).
+If you find any bugs or have problems when you are using ACSCeND, feel free to raise issues.
 
 ---
+
+## Citation
+```bibtex
+@article {ACSCeND,
+	author = {Chowdhury*, Debojyoti and Priyadarshi*, Shreyansh and Biswas, Sayan and Neekhra, Bhavesh and Gupta, Debayan and Haldar, Shubhasis},
+	title = {Comprehensive Enumeration of Cancer Stem-like Cell Heterogeneity Using Deep Neural Network},
+	elocation-id = {2024.11.26.625418},
+	year = {2024},
+	doi = {10.1101/2024.11.26.625418},
+	publisher = {Cold Spring Harbor Laboratory},
+	URL = {https://www.biorxiv.org/content/early/2024/12/01/2024.11.26.625418},
+	eprint = {https://www.biorxiv.org/content/early/2024/12/01/2024.11.26.625418.full.pdf},
+	journal = {bioRxiv}
+}
+'''
