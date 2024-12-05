@@ -54,7 +54,7 @@ For detailed examples and API reference, visit the [documentation](https://acsce
 
 ---
 
-## Suggestions and Issues
+## Issues
 
 We welcome issues!
 If you find any bugs or have problems when you are using ACSCeND, feel free to raise issues.
