@@ -56,7 +56,7 @@ For detailed examples and API reference, visit the [documentation](https://acsce
 
 ## Suggestions and Issues
 
-We welcome suggestions and issues! If you have any ideas or feedback to improve ACSCeND, please reach out to [Shreyansh Priyadarshi](mailto:shreyansh.priyadarshi02@gmail.com).
+We welcome issues!
 If you find any bugs or have problems when you are using ACSCeND, feel free to raise issues.
 
 ---
