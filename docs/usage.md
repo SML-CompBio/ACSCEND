@@ -20,8 +20,8 @@ Example input files for testing can be found in the `test` directory of the GitH
 - `classifier_test.csv` – For cell-type classification
 - `PBMC_PSEUDOBULK.csv` – Bulk RNA-seq input data
 - `signature_matrix_pbmc.csv` – Signature matrix for deconvolution
-- `cell_fractions_PBMC.csv` – True cell-type frequencies (optional)
-- `PBMC_PSEUDOBULK_INDEPENDENT.csv` – Independent test data
+- `cell_fractions_PBMC.csv` – True cell-type frequencies
+- `PBMC_PSEUDOBULK_INDEPENDENT.csv` – Independent data on which trained model will be applied.
 
 ---
 
@@ -51,6 +51,7 @@ from ACSCeND import Predictor, Deconvoluter
 The `Predictor` class allows you to classify transcriptomic samples into stem cell types.
 
 > ⚠️ **Note**: The classifier handles all necessary preprocessing internally. You may use either raw counts or normalized expression data.
+
 > ❗ Do **not** use the raw model file from GitHub directly — the Python API is required to ensure preprocessing and normalization are done correctly.
 
 ### ✅ Example Usage
@@ -79,10 +80,10 @@ The `Deconvoluter` class can be used to infer cell-type compositions from bulk R
 
 ### ✅ Required Inputs
 
-* `data` – Bulk RNA-seq gene expression matrix (samples × genes)
-* `sig` – Signature gene expression matrix (cell types × genes)
-* `freq` – Known cell-type fractions (for evaluation; optional)
-* `org` – Independent bulk test dataset
+* `data` – Bulk RNA-seq gene expression matrix (samples × genes) [For Training]
+* `sig` – Signature gene expression matrix (cell types × genes) [For Training]
+* `freq` – Known cell-type fractions [For Training] 
+* `org` – Independent bulk test dataset [For Inference]
 * `normalized` – Whether the input data is already normalized (`True`/`False`)
 
 ### ✅ Example Usage
