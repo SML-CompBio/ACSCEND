@@ -3,9 +3,9 @@
 OncoMark provides a Python API for two core functionalities:
 
 1. **Stem Cell Type Classification** – Classifies transcriptomic samples into one of three categories:  
-   - *Pluripotent*  
-   - *Multipotent*  
-   - *Unipotent*
+    - *Pluripotent*  
+    - *Multipotent*  
+    - *Unipotent*
 
 2. **Transcriptomic Deconvolution** – Estimates and quantifies the relative proportions of different cell types within bulk RNA-seq samples.
 
