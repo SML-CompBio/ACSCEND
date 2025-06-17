@@ -17,7 +17,6 @@ This page outlines the steps for using both modules with example data and script
 
 Example input files for testing can be found in the `test` directory of the GitHub repository:
 
-- [model_test_data.csv](https://github.com/SML-CompBio/OncoMark/blob/main/test/model_test_data.csv)
 - `classifier_test.csv` – For cell-type classification
 - `PBMC_PSEUDOBULK.csv` – Bulk RNA-seq input data
 - `signature_matrix_pbmc.csv` – Signature matrix for deconvolution
