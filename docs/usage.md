@@ -96,7 +96,7 @@ true_frequencies = 'cell_fractions_PBMC.csv'
 independent_data = 'PBMC_PSEUDOBULK_INDEPENDENT.csv'
 
 # Run deconvolution (set normalized=False for raw counts)
-org_freq, org_gep = Deconvoluter(
+org_freq = Deconvoluter(
     data_path,
     signature_path,
     true_frequencies,
