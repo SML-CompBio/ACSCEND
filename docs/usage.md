@@ -64,11 +64,11 @@ df_pred = pd.read_csv('classifier_test.csv', index_col=0)
 predictor = Predictor()
 
 # Predict stem cell type (returns class labels)
-predictions = predictor('classifier_test.csv', prob=False)
+predictions = predictor(df_pred, prob=False)
 print(predictions)
 
 # Predict class probabilities
-probabilities = predictor('classifier_test.csv', prob=True)
+probabilities = predictor(df_pred, prob=True)
 print(probabilities)
 ```
 
