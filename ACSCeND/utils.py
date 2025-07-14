@@ -28,7 +28,7 @@ def raw_to_cpm(df):
 def load_data(data, sig, freq, org, normalized=None):
     sig = pd.read_csv(sig, index_col=0)
     sig = sig[~np.all(sig == 0, axis=1)].sort_index()
-    sig = stats.zscore(sig, axis=0, ddof=1)
+    sig = pd.DataFrame(stats.zscore(sig, axis=0, ddof=1), index=sig.index, columns=sig.columns)
 
     data = pd.read_csv(data, index_col=(0))
     data = data[data.index.isin(sig.index)].sort_index()

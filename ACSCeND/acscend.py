@@ -74,71 +74,26 @@ def deconvolution_train(data, sig, freq, org, normalized):
     return model1, sig_tensor, X_test_tensor, input_dim, output_dim
 
 
-def Deconvoluter(data, sig, freq, org, normalized=None):
+def Deconvoluter(data, sig, freq, org, normalized=True):
     data, sig, freq, org = load_data(data, sig, freq, org, normalized)
     model1, sig_tensor, X_test_tensor, input_dim, output_dim = deconvolution_train(data, sig, freq, org, normalized)
     model1.eval()
     with torch.no_grad():
         test_cell_fractions, _, _ = model1(X_test_tensor)
-
-    hidden_dim = 256
-    attention_dim = 2048
-    signature_dim = output_dim
-    
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    model2 = DeconvolutionModel1(input_dim, hidden_dim, attention_dim, output_dim, sig_tensor).to(device)
-    loss_function = nn.MSELoss()
-    optimizer1 = optim.Adam(model2.parameters(), lr=0.0001)
-
-    l1 = 0.01 # Kl_div loss
-    l2 = 0.01 # pseudobulk_reconstruction_loss
-    l3 = 0.01  #pseudo loss1
-    l4 = 1
-    l5 = 0.00
-
-    num_epochs = 100
-    kl_loss_function = nn.KLDivLoss(reduction="batchmean")
-    print('Prediction Started')
-    for epoch in range(num_epochs):
-        model2.train()
-        cell_fractions_pred, reconstructed1, gep_predictions1 = model2(X_test_tensor)
-
-        train_loss1 = loss_function(cell_fractions_pred, test_cell_fractions)
-        pseudobulk_reconstruction_loss1 = loss_function(X_test_tensor, reconstructed1)
-        pseudo_bulk_pred_gep_and_Y_train1 = torch.matmul(test_cell_fractions, gep_predictions1.T)
-        loss_pseudo_gep1 = loss_function(X_test_tensor, pseudo_bulk_pred_gep_and_Y_train1)
-
-        loss_gep_sig1 = loss_function(gep_predictions1, sig_tensor)
-        prior = torch.full_like(test_cell_fractions, fill_value=1.0 / output_dim).to(device)
-        kl_div_loss1 = kl_loss_function(torch.log_softmax(cell_fractions_pred, dim=-1), prior)
-        loss_ccc = 1 - compute_ccc(test_cell_fractions, cell_fractions_pred)
-        total_loss1 = train_loss1 + l1 * kl_div_loss1 + l2 * pseudobulk_reconstruction_loss1 + l3 * loss_pseudo_gep1 + l4 * loss_gep_sig1 
-
-        optimizer1.zero_grad()
-        total_loss1.backward()
-        optimizer1.step()
-
-        if (epoch + 1) % 10 == 0:
-            print(f'Epoch [{epoch + 1}/{num_epochs}], Train Loss: {total_loss1.item():.4f}')
-
-    gep_predictions1_df = gep_predictions1.detach().cpu().numpy()
-    gep_predictions1_df = pd.DataFrame(gep_predictions1_df, index=org.columns, columns=sig.columns)
-
     test_cell_fractions_df = test_cell_fractions.detach().cpu().numpy()
     test_cell_fractions_df = pd.DataFrame(test_cell_fractions_df, index=org.index, columns=sig.columns)
-    
-    return test_cell_fractions_df, gep_predictions1_df
+    return test_cell_fractions_df
     
 class Predictor:
     def __init__(self):
         # Load the model from the same directory as this script
         self.model = joblib.load(os.path.join(os.path.dirname(__file__), 'lr_model.joblib'))
+        self.scaler = joblib.load(os.path.join(os.path.dirname(__file__), 'lr_scaler.joblib'))
         self.feature_names = self.model.feature_names_in_
         self.label_mapping = {0: 'Pluripotent', 1: 'Multipotent', 2: 'Unipotent'}
 
-    def preprocess_data(self, data_path):
+    def preprocess_data(self, data):
         # Load data from CSV file
-        data = pd.read_csv(data_path, index_col=0)
 
         # Reindex columns to match the model's expected features and fill missing columns with zeros
         data = data.reindex(columns=self.feature_names, fill_value=0).fillna(0)
@@ -148,15 +103,17 @@ class Predictor:
         data_ind = data.index
 
         # Rank the data and scale it
-        ranked_data = rankdata(data * -1, axis=1, method='average')
-        data = pd.DataFrame(ranked_data, columns=data_col, index=data_ind)
-        data = np.log2(data + 1).apply(zscore, axis=0).fillna(0)
+        data = rankdata(data * -1, axis=1, method='average')
+        data = np.log2(data + 1)
+        data = pd.DataFrame(data, columns=data_col, index=data_ind)
+        data = self.scaler.transform(data)
+        data = pd.DataFrame(data, columns=data_col, index=data_ind)
 
         return data, data_ind
 
-    def predict(self, data_path, prob=False):
+    def predict(self, data, prob=False):
         # Preprocess the input data
-        test_data, data_ind = self.preprocess_data(data_path)
+        test_data, data_ind = self.preprocess_data(data)
         # Return prediction probabilities if prob=True, else return predictions
         if prob:
             probabilities = self.model.predict_proba(test_data)
