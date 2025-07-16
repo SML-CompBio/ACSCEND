@@ -5,7 +5,7 @@ ACSCeND is based on the deep learning framework [PyTorch](https://pytorch.org). 
 You can use either `conda` or Python's built-in `venv` to create an isolated environment.
 
 #### Option A: Using Conda
-
+⚠️ Requires [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Anaconda](https://www.anaconda.com/)
 ```bash
 # Create and activate a new conda environment
 conda create -n acscend_env python=3.13.0
@@ -13,7 +13,7 @@ conda activate acscend_env
 ```
 
 #### Option B: Using venv
-
+⚠️ Requires Python 3.13.0 to be installed and available as python3.13
 ```bash
 # Create and activate a new virtual environment
 python3.13 -m venv acscend_env
