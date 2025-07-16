@@ -21,7 +21,6 @@ source acscend_env/bin/activate       # On Windows: acscend_env\Scripts\activate
 ```
 
 ### Step 2: Install Required Dependencies
-
 ```bash
 pip install pandas==2.3.1 \
             numpy==2.3.1 \
@@ -34,12 +33,15 @@ We recommed you to install Jupyter Notebook as well.
 ```bash
 pip install notebook
 ```
+
 ### Step 3: Install ACSCeND
 After successfully installing PyTorch and Required Dependencies, you can install ACSCeND directly from PyPI:
-
 ```bash
-# pip
 pip install ACSCeND
+```
+After installing ACSCeND, you recommend you to open jupyter notebook to use ACSCeND.
+```bash
+jupyter notebook
 ```
 
 You’re all set! Start exploring the features of ACSCeND.
