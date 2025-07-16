@@ -30,7 +30,10 @@ pip install pandas==2.3.1 \
             joblib==1.5.1 \
             scipy==1.16.0
 ```
-
+We recommed you to install Jupyter Notebook as well.
+```bash
+pip install notebook
+```
 ### Step 3: Install ACSCeND
 After successfully installing PyTorch and Required Dependencies, you can install ACSCeND directly from PyPI:
 
