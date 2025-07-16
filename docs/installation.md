@@ -39,7 +39,7 @@ After successfully installing PyTorch and Required Dependencies, you can install
 ```bash
 pip install ACSCeND
 ```
-After installing ACSCeND, you recommend you to open jupyter notebook to use ACSCeND.
+After installing ACSCeND, we recommend you to open jupyter notebook to use ACSCeND.
 ```bash
 jupyter notebook
 ```
