@@ -4,7 +4,7 @@ ACSCeND is based on the deep learning framework [PyTorch](https://pytorch.org). 
 ### Step 1: Create a Python 3.13.0 Environment
 You can use either `conda` or Python's built-in `venv` to create an isolated environment.
 
-#### Option A: Using Conda
+#### Option A: Using Conda (Recommended)
 ⚠️ Requires [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Anaconda](https://www.anaconda.com/)
 ```bash
 # Create and activate a new conda environment
