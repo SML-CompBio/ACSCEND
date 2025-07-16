@@ -1,44 +1,42 @@
 ## Installation
 ACSCeND is based on the deep learning framework [PyTorch](https://pytorch.org). It is important for users to choose the suitable version of PyTorch based on different compute platforms. The [official instruction](https://pytorch.org/get-started/locally/) may help you install PyTorch correctly.
 
-### Step 1: Install PyTorch
-Visit the [PyTorch installation page](https://pytorch.org/get-started/locally/) to select the appropriate version for your platform (CPU/GPU) and Python environment.
+### Step 1: Create a Python 3.13.0 Environment
+You can use either `conda` or Python's built-in `venv` to create an isolated environment.
 
-For example, to install PyTorch with CUDA support:
-
-```bash
-# Install PyTorch with CUDA (adjust the version as needed)
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
-```
-
-Or for CPU-only:
+#### Option A: Using Conda
 
 ```bash
-# Install PyTorch for CPU-only
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+# Create and activate a new conda environment
+conda create -n acscend_env python=3.13.0
+conda activate acscend_env
 ```
 
-### Step 2: Install ACSCeND
-After successfully installing PyTorch, you can install ACSCeND directly from PyPI:
+#### Option B: Using venv
+
+```bash
+# Create and activate a new virtual environment
+python3.13 -m venv acscend_env
+source acscend_env/bin/activate       # On Windows: acscend_env\Scripts\activate
+```
+
+### Step 2: Install Required Dependencies
+
+```bash
+pip install pandas==2.3.1 \
+            numpy==2.3.1 \
+            torch==2.7.1 \
+            scikit-learn==1.7.0 \
+            joblib==1.5.1 \
+            scipy==1.16.0
+```
+
+### Step 3: Install ACSCeND
+After successfully installing PyTorch and Required Dependencies, you can install ACSCeND directly from PyPI:
 
 ```bash
 # pip
 pip install ACSCeND
-```
-
-Alternatively, if you want the latest version from the GitHub repository, use:
-
-```bash
-# Install directly from GitHub
-pip install git+https://github.com/SML-CompBio/ACSCEND.git
-```
-
-### Step 3: Verify Installation
-To confirm that ACSCeND has been installed successfully, run the following command in Python:
-
-```python
-import ACSCeND
-print(ACSCeND.__version__)
 ```
 
 You’re all set! Start exploring the features of ACSCeND.
